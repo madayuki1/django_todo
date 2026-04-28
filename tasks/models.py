@@ -1,5 +1,4 @@
 from django.db import models
-from .models import tasks
 
 # Create your models here.
 
