@@ -1,6 +1,7 @@
+{% load django_browser_reload static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,20 @@
 </head>
 <body>
     <h1>Task List</h1>
+    <section>
+        {% csrf_token %}
+        <form action="" method="post">
+            <input type="text" name="title" id="task-input">
+            <button type="submit">Submit</button>
+        </form>
+    </section>
     {% for task in tasks%}
-    <div class="container">
-        <h1 class="element">{{ task.title }}</h1>
-        <button class="element">{{task.completed}}</button>
-    </div>
+    <section>
+        <article class="task_element">
+            <span>{{ task.title }}</span>
+            <input type="checkbox" name="task_completed" id="task_completed" {% if task.completed %} checked {% endif %}>
+        </article>
+    </section>
     {% endfor %}
 </body>
 </html>
