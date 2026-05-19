@@ -11,8 +11,8 @@
 <body>
     <h1>Task List</h1>
     <section>
-        {% csrf_token %}
         <form action="" method="post">
+            {% csrf_token %}
             <input type="text" name="title" id="task-input">
             <button type="submit">Submit</button>
         </form>
