@@ -1,6 +1,6 @@
 # tasks/views.py
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task
 
 def index(request):
@@ -26,3 +26,7 @@ def index(request):
         context = context,
         template_name= 'tasks/tasks.html'
     )
+
+def toggle_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    return task

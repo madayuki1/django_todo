@@ -18,12 +18,21 @@
         </form>
     </section>
     {% for task in tasks%}
-    <section>
-        <article class="task_element">
-            <span>{{ task.title }}</span>
-            <input type="checkbox" name="task_completed" id="task_completed" {% if task.completed %} checked {% endif %}>
-        </article>
-    </section>
+    <form method="POST" action="{% url 'toggle_task' task.id %}">
+        {% csrf_token %}
+        <section>
+            <article class="task_element">
+                <span>{{ task.title }}</span>
+                <input 
+                    type="checkbox"
+                    name="task_complete"
+                    id="task_complete"
+                    onchange="this.form.submit()"
+                    {% if task.completed %} checked {% endif %}
+                >
+            </article>
+        </section>
+    </form>
     {% endfor %}
 </body>
 </html>
