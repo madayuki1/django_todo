@@ -29,4 +29,8 @@ def index(request):
 
 def toggle_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-    return task
+    task.completed = not task.completed
+    task.save()
+    return redirect(
+        to='index'
+    )
