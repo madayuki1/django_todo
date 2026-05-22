@@ -18,11 +18,12 @@
         </form>
     </section>
     {% for task in tasks%}
-    <form method="POST" action="{% url 'toggle_task' task.id %}">
-        {% csrf_token %}
-        <section>
-            <article class="task_element">
-                <span>{{ task.title }}</span>
+    <section>
+        <article class="task_element">
+            <span>{{ task.title }}</span>
+            <form action="{% url 'delete_task' task.id %}">Delete</form>
+            <form method="POST" action="{% url 'toggle_task' task.id %}">
+                {% csrf_token %}
                 <input 
                     type="checkbox"
                     name="task_complete"
@@ -30,9 +31,9 @@
                     onchange="this.form.submit()"
                     {% if task.completed %} checked {% endif %}
                 >
-            </article>
-        </section>
-    </form>
+            </form>
+        </article>
+    </section>
     {% endfor %}
 </body>
 </html>
