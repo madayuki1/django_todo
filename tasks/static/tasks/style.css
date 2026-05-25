@@ -28,7 +28,17 @@
 
 input[type='checkbox']{
     font-size: inherit;
-    width: 0.8em;
-    height: 0.8em;
+    height: 1.3rem;
+    aspect-ratio: 1/1;
     vertical-align: middle;
+}
+.btn-delete img{
+    height: 1.3rem;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
+.left-side{
+    display: flex;
+    gap: 1rem;
 }

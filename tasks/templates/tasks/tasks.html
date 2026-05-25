@@ -20,8 +20,15 @@
     {% for task in tasks%}
     <section>
         <article class="task_element">
-            <span>{{ task.title }}</span>
-            <form action="{% url 'delete_task' task.id %}">Delete</form>
+            <div class='left-side'>
+                <form action="{% url 'delete_task' task.id %}">
+                    <button class='btn-delete' type="submit">
+                       <img src="{% static "tasks/img/delete.png" %}" alt="Delete">
+                    </button>
+                </form>
+                <span>{{ task.title }}</span>
+                <span>{{ task.due_date }}</span>
+            </div>
             <form method="POST" action="{% url 'toggle_task' task.id %}">
                 {% csrf_token %}
                 <input 
