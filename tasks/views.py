@@ -1,15 +1,21 @@
 # tasks/views.py
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+from datetime import timedelta
 from .models import Task
 
 def index(request):
 
     if request.method == "POST":
         title = request.POST.get("title")
+        due_date = request.POST.get("due_date")
 
         if title:
-            Task.objects.create(title=title)
+            Task.objects.create(
+                title=title,
+                due_date=due_date
+            )
 
         return redirect(
             to='index'
@@ -18,7 +24,8 @@ def index(request):
     tasks = Task.objects.all()
 
     context = {
-        "tasks": tasks
+        "tasks": tasks,
+        "tomorrow": timezone.now() + timedelta(days=1),
     }
 
     return render(

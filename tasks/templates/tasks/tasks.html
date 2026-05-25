@@ -14,6 +14,7 @@
         <form action="" method="post">
             {% csrf_token %}
             <input type="text" name="title" id="task-input">
+            <input type="datetime-local" name="due_date" id="btn-date" value="{{ tomorrow| date:'Y-m-d\\TH:i' }}">
             <button type="submit">Submit</button>
         </form>
     </section>
@@ -27,7 +28,8 @@
                     </button>
                 </form>
                 <span>{{ task.title }}</span>
-                <span>{{ task.due_date }}</span>
+                <span id="due-date">{{ task.due_date }}</span>
+                <span id="remaining-days">{{ task.remaining_days }} Days Remaining</span>
             </div>
             <form method="POST" action="{% url 'toggle_task' task.id %}">
                 {% csrf_token %}
