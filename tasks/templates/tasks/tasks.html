@@ -10,17 +10,29 @@
 </head>
 <body>
     <h1>Task List</h1>
-    <section>
+    <section class="input-bar">
         <form action="" method="post">
             {% csrf_token %}
-            <input type="text" name="title" id="task-input">
+            <input type="text" name="title" id="task-input" placeholder="Task Name...">
             <input type="datetime-local" name="due_date" id="btn-date" value="{{ tomorrow| date:'Y-m-d\\TH:i' }}">
             <button type="submit">Submit</button>
         </form>
     </section>
+    <section class="search-bar">
+        <input type="search-bar" name="search" placeholder="Search...">
+        <input type="button" value="Submit">
+    </section>
     {% for task in tasks%}
     <section>
-        <article class="task_element">
+        <article class="task_element 
+        {% if task.completed %} 
+            completed-article 
+        {% elif task.remaining_days == 'Overdue' %}
+            overdue-article
+        {% elif task.remaining_days == 'Today' %}
+            today-article
+        {% endif %}
+        ">
             <div class='left-side'>
                 <form action="{% url 'delete_task' task.id %}">
                     <button class='btn-delete' type="submit">
@@ -29,18 +41,19 @@
                 </form>
                 <span>{{ task.title }}</span>
                 <span id="due-date">{{ task.due_date }}</span>
-                <span id="remaining-days">{{ task.remaining_days }} Days Remaining</span>
             </div>
-            <form method="POST" action="{% url 'toggle_task' task.id %}">
-                {% csrf_token %}
-                <input 
-                    type="checkbox"
-                    name="task_complete"
-                    id="task_complete"
-                    onchange="this.form.submit()"
-                    {% if task.completed %} checked {% endif %}
-                >
-            </form>
+            <div class="right-side">
+                <span id="remaining-days">{{ task.remaining_days }}</span>
+                <form action="{% url 'toggle_task' task.id %}">
+                    <input
+                        type="checkbox"
+                        name="task_complete"
+                        id="task_complete"
+                        onchange="this.form.submit()"
+                        {% if task.completed %} checked {% endif %}
+                    >
+                </form>
+            </div>
         </article>
     </section>
     {% endfor %}

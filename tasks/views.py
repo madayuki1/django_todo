@@ -10,6 +10,7 @@ def index(request):
     if request.method == "POST":
         title = request.POST.get("title")
         due_date = request.POST.get("due_date")
+        search = request.GET.get("search")
 
         if title:
             Task.objects.create(

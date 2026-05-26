@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
 
 # Create your models here.
 
@@ -15,8 +16,21 @@ class Task(models.Model):
         return self.id
 
     @property
-    def remaining_days(self):
+    def remaining_days_value(self):
         now = timezone.now().date()
         delta = self.due_date.date() - now
 
         return delta.days
+    
+    @property
+    def remaining_days(self):
+        if self.completed:
+            return "Completed"
+        days = self.remaining_days_value
+
+        if days < 0:
+            return "Overdue"
+        elif days == 0:
+            return "Today"
+        else:
+            return f"{days} Days"

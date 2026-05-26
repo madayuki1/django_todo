@@ -5,9 +5,11 @@
     justify-content: center;
     align-items: center;
 }
-
-.element {
-    margin: 10px;
+.input-bar{
+    margin: 1rem;
+}
+.search-bar{
+    margin: 1rem;
 }
 
 .todo_item {
@@ -25,6 +27,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.completed-article{
+    background-color: #9ffce4;
+}
+.overdue-article{
+    background-color: #d97b7b;;
+}
+.today-article{
+    background-color: #b5bf5a;
 }
 
 input[type='checkbox']{
@@ -44,6 +55,12 @@ input[type='checkbox']{
 }
 
 .left-side{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.right-side{
     display: flex;
     gap: 1rem;
     align-items: center;
