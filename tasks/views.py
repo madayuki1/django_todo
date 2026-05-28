@@ -6,11 +6,15 @@ from datetime import timedelta
 from .models import Task
 
 def index(request):
+    tasks = Task.objects.all()
+    search = request.GET.get("search")
+
+    if search:
+        tasks = tasks.filter(title__icontains = search)
 
     if request.method == "POST":
         title = request.POST.get("title")
         due_date = request.POST.get("due_date")
-        search = request.GET.get("search")
 
         if title:
             Task.objects.create(
@@ -22,7 +26,6 @@ def index(request):
             to='index'
         )
 
-    tasks = Task.objects.all()
 
     context = {
         "tasks": tasks,
