@@ -33,10 +33,11 @@
             placeholder="Search tasks..."
         >
         <form action="" method="get">
-            <select name="sort-list" id="sort-list" onchange=this.form.submit()>
-                <option value="+due_date">Date Latest</option>
-                <option value="-due_date">Date Earliest</option>
-                <option value="not-completed">Not Completed</option>
+            <select name="sort" id="sort-list" onchange=this.form.submit()>
+                {% for key, value in sorts.items %}
+                <option value="{{ key }} {% if sort == key %} selected {% endif %}">
+                    {{ value }}</option>
+                {% endfor %}
             </select>
         </form>
     </section>
