@@ -7,10 +7,15 @@ from .models import Task
 
 def index(request):
     tasks = Task.objects.all()
-    search = request.GET.get("search")
+    search = request.GET.get("search", "")
+    sort = request.GET.get("sort-list", "")
 
     if search:
         tasks = tasks.filter(title__icontains = search)
+    
+    if sort:
+        tasks = tasks.order_by(sort)
+
 
     if request.method == "POST":
         title = request.POST.get("title")
@@ -32,6 +37,12 @@ def index(request):
         "tomorrow": timezone.now() + timedelta(days=1),
     }
 
+    if request.htmx:
+        return render(
+            request=request,
+            template_name = "tasks/task_list.html",
+            context=context
+        )
     return render(
         request = request,
         context = context,

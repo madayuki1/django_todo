@@ -19,43 +19,30 @@
         </form>
     </section>
     <section class="search-bar">
-        <input type="search-bar" name="search" placeholder="Search...">
-        <input type="button" value="Submit">
+        {% csrf_token %}
+        <input 
+            type="text" 
+            name="search" 
+                
+            hx-get="{% url 'index' %}"
+            hx-trigger="keyup changed delay:300ms"
+            hx-target="#task-list"
+            hx-swap="innerHTML"
+            hx-include="closest form"
+
+            placeholder="Search tasks..."
+        >
+        <form action="" method="get">
+            <select name="sort-list" id="sort-list" onchange=this.form.submit()>
+                <option value="+due_date">Date Latest</option>
+                <option value="-due_date">Date Earliest</option>
+                <option value="not-completed">Not Completed</option>
+            </select>
+        </form>
     </section>
-    {% for task in tasks%}
-    <section>
-        <article class="task_element 
-        {% if task.completed %} 
-            completed-article 
-        {% elif task.remaining_days == 'Overdue' %}
-            overdue-article
-        {% elif task.remaining_days == 'Today' %}
-            today-article
-        {% endif %}
-        ">
-            <div class='left-side'>
-                <form action="{% url 'delete_task' task.id %}">
-                    <button class='btn-delete' type="submit">
-                       <img src="{% static "tasks/img/delete.png" %}" alt="Delete">
-                    </button>
-                </form>
-                <span>{{ task.title }}</span>
-                <span id="due-date">{{ task.due_date }}</span>
-            </div>
-            <div class="right-side">
-                <span id="remaining-days">{{ task.remaining_days }}</span>
-                <form action="{% url 'toggle_task' task.id %}">
-                    <input
-                        type="checkbox"
-                        name="task_complete"
-                        id="task_complete"
-                        onchange="this.form.submit()"
-                        {% if task.completed %} checked {% endif %}
-                    >
-                </form>
-            </div>
-        </article>
-    </section>
-    {% endfor %}
+    <div id="task-list">
+        {% include "tasks/task_list.html" %}
+    </div>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 </body>
 </html>
