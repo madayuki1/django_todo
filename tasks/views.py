@@ -4,16 +4,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from datetime import timedelta
 from .models import Task
-from .constants import SORT_OPTION
+from .constants import SORT_OPTION, DEFAULT_SORT
 
 def index(request):
     tasks = Task.objects.all()
     search = request.GET.get("search", "")
+    selected_sort = request.GET.get("sort", DEFAULT_SORT)
 
     if search:
         tasks = tasks.filter(title__icontains = search)
     
-    tasks = get_sorted_task(request=request)
+    tasks = get_sorted_task(tasks = tasks, selected_sort=selected_sort)
 
     if request.method == "POST":
         title = request.POST.get("title")
@@ -29,10 +30,10 @@ def index(request):
             to='index'
         )
 
-
     context = {
         "tasks": tasks,
         "sorts": SORT_OPTION,
+        "selected_sort": selected_sort,
         "tomorrow": timezone.now() + timedelta(days=1),
     }
 
@@ -48,12 +49,10 @@ def index(request):
         template_name= 'tasks/tasks.html'
     )
 
-def get_sorted_task(request):
-    tasks = Task.objects.all()
-    selected_sort = request.GET.get("sort", "")
+def get_sorted_task(tasks, selected_sort):
     if selected_sort in SORT_OPTION:
         tasks = tasks.order_by(
-            SORT_OPTION[selected_sort]
+            SORT_OPTION[selected_sort]["keyword"]
         )
     return tasks
 

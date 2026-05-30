@@ -35,11 +35,12 @@
         <form action="" method="get">
             <select name="sort" id="sort-list" onchange=this.form.submit()>
                 {% for key, value in sorts.items %}
-                <option value="{{ key }} {% if sort == key %} selected {% endif %}">
-                    {{ value }}</option>
+                <option value="{{ key }}" {% if selected_sort == key %} selected {% endif %}>
+                    {{ value.label }}</option>
                 {% endfor %}
             </select>
         </form>
+        <input type="checkbox" name="show-completed" id="show-completed" >
     </section>
     <div id="task-list">
         {% include "tasks/task_list.html" %}

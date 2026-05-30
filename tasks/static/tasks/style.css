@@ -10,6 +10,13 @@
 }
 .search-bar{
     margin: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    box-sizing: border-box;
+}
+.search-bar select {
+    height: 2rem;
+    display: flex;
 }
 
 .todo_item {
