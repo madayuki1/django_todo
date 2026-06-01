@@ -14,9 +14,10 @@
     gap: 0.5rem;
     box-sizing: border-box;
 }
-.search-bar select {
+.search-bar form{
     height: 2rem;
     display: flex;
+    gap: 0.5rem;
 }
 
 .todo_item {
@@ -49,7 +50,7 @@ input[type='checkbox']{
     height: 1.3rem;
     aspect-ratio: 1/1;
 }
-.btn-delete img{
+.left-side img{
     height: 1.3rem;
     aspect-ratio: 1/1;
     object-fit: contain;

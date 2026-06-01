@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "tasks/forms.css" %}">
+</head>
+<body>
+    <form action="" method="post" class="edit-form">
+        {% csrf_token %}
+        <label for="{{ form.title.id_for_label }}">Title</label>
+        {{ form.title }} 
+        <label for="{{ form.due_date.id_for_label }}">Due Date</label>
+        {{ form.due_date }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -39,8 +39,9 @@
                     {{ value.label }}</option>
                 {% endfor %}
             </select>
+            <span>Hide Completed</span>
+            <input type="checkbox" name="hide-completed" id="hide-completed" onchange="this.form.submit()">
         </form>
-        <input type="checkbox" name="show-completed" id="show-completed" >
     </section>
     <div id="task-list">
         {% include "tasks/task_list.html" %}

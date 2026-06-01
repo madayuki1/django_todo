@@ -2,6 +2,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 from datetime import timedelta
 from .models import Task
 from .constants import SORT_OPTION, DEFAULT_SORT
@@ -10,9 +12,13 @@ def index(request):
     tasks = Task.objects.all()
     search = request.GET.get("search", "")
     selected_sort = request.GET.get("sort", DEFAULT_SORT)
+    hide_completed = request.GET.get("hide-completed", "")
 
     if search:
         tasks = tasks.filter(title__icontains = search)
+    
+    if hide_completed:
+        tasks = tasks.filter(hide_completed = hide_completed)
     
     tasks = get_sorted_task(tasks = tasks, selected_sort=selected_sort)
 
@@ -34,6 +40,7 @@ def index(request):
         "tasks": tasks,
         "sorts": SORT_OPTION,
         "selected_sort": selected_sort,
+        "hide_completed": hide_completed,
         "tomorrow": timezone.now() + timedelta(days=1),
     }
 
@@ -48,6 +55,12 @@ def index(request):
         context = context,
         template_name= 'tasks/tasks.html'
     )
+
+class TaskEdit(UpdateView):
+    model = Task
+    fields = ['title', 'due_date']
+    template_name = "tasks/task_edit.html"
+    success_url = reverse_lazy('index')
 
 def get_sorted_task(tasks, selected_sort):
     if selected_sort in SORT_OPTION:
