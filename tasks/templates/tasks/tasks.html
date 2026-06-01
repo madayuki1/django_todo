@@ -10,38 +10,46 @@
 </head>
 <body>
     <h1>Task List</h1>
-    <section class="input-bar">
-        <form action="" method="post">
+    <section class="toolbar">
+        <div class="input-bar">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="title" id="task-input" placeholder="Task Name...">
+                <div class="input-bar-bottom">
+                    <input type="datetime-local" name="due_date" id="btn-date" value="{{ tomorrow| date:'Y-m-d\TH:i' }}">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="search-bar">
             {% csrf_token %}
-            <input type="text" name="title" id="task-input" placeholder="Task Name...">
-            <input type="datetime-local" name="due_date" id="btn-date" value="{{ tomorrow| date:'Y-m-d\\TH:i' }}">
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-    <section class="search-bar">
-        {% csrf_token %}
-        <input 
-            type="text" 
-            name="search" 
-                
-            hx-get="{% url 'index' %}"
-            hx-trigger="keyup changed delay:300ms"
-            hx-target="#task-list"
-            hx-swap="innerHTML"
-            hx-include="closest form"
-
-            placeholder="Search tasks..."
-        >
-        <form action="" method="get">
-            <select name="sort" id="sort-list" onchange=this.form.submit()>
-                {% for key, value in sorts.items %}
-                <option value="{{ key }}" {% if selected_sort == key %} selected {% endif %}>
-                    {{ value.label }}</option>
-                {% endfor %}
-            </select>
-            <span>Hide Completed</span>
-            <input type="checkbox" name="hide-completed" id="hide-completed" onchange="this.form.submit()">
-        </form>
+            <input
+                type="text"
+                name="search"
+        
+                hx-get="{% url 'index' %}"
+                hx-trigger="keyup changed delay:300ms"
+                hx-target="#task-list"
+                hx-swap="innerHTML"
+                hx-include="closest form"
+                placeholder="Search tasks..."
+            >
+            <form action="" method="get">
+                <select name="sort" id="sort-list" onchange=this.form.submit()>
+                    {% for key, value in sorts.items %}
+                    <option value="{{ key }}" {% if selected_sort == key %} selected {% endif %}>
+                        {{ value.label }}</option>
+                    {% endfor %}
+                </select>
+                <span>Hide Completed</span>
+                <input
+                    type="checkbox"
+                    name="hide-completed"
+                    id="hide-completed"
+                    {% if hide_completed %} checked {% endif %}
+                    onchange="this.form.submit()">
+            </form>
+        </div>
     </section>
     <div id="task-list">
         {% include "tasks/task_list.html" %}

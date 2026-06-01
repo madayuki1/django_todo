@@ -18,7 +18,7 @@ def index(request):
         tasks = tasks.filter(title__icontains = search)
     
     if hide_completed:
-        tasks = tasks.filter(hide_completed = hide_completed)
+        tasks = tasks.filter(completed = False)
     
     tasks = get_sorted_task(tasks = tasks, selected_sort=selected_sort)
 
