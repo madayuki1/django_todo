@@ -41,13 +41,15 @@
                         {{ value.label }}</option>
                     {% endfor %}
                 </select>
-                <span>Hide Completed</span>
-                <input
-                    type="checkbox"
-                    name="hide-completed"
-                    id="hide-completed"
-                    {% if hide_completed %} checked {% endif %}
-                    onchange="this.form.submit()">
+                <div class="search-bar-bottom">
+                    <span>Hide Completed</span>
+                    <input
+                        type="checkbox"
+                        name="hide-completed"
+                        id="hide-completed"
+                        {% if hide_completed %} checked {% endif %}
+                        onchange="this.form.submit()">
+                </div>
             </form>
         </div>
     </section>

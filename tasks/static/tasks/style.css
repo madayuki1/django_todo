@@ -1,10 +1,5 @@
-.container {
-    /* background-color: yellowgreen; */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+/* #region Toolbar */
+
 .toolbar{
     display: flex;
     justify-content: space-between;
@@ -18,7 +13,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin: 1rem;
+    margin: auto 0;
 }
 .input-bar #task-input{
     display: block;
@@ -32,9 +27,10 @@
     margin: 1rem;
 }
 .search-bar{
-    margin: 1rem;
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 1rem;
     box-sizing: border-box;
 }
 .search-bar form{
@@ -42,10 +38,9 @@
     display: flex;
     gap: 0.5rem;
 }
+/* #endregion */
 
-.todo_item {
-    background-color: yellow;
-}
+/* #region task card */
 
 .task_element {
     margin: 10px;
@@ -61,6 +56,8 @@
     max-width: 1200px;
     margin: 1rem auto;
 }
+/* #region task-color */
+
 .completed-article{
     background-color: #9ffce4;
 }
@@ -70,21 +67,12 @@
 .today-article{
     background-color: #b5bf5a;
 }
+/* #endregion */
 
-input[type='checkbox']{
-    height: 1.3rem;
-    aspect-ratio: 1/1;
-}
 .left-side img{
     height: 1.3rem;
     aspect-ratio: 1/1;
     object-fit: contain;
-}
-#due-date{
-    font-size: 1rem;
-}
-#remaining-days{
-    font-size: 1.2rem;
 }
 
 .left-side{
@@ -92,9 +80,20 @@ input[type='checkbox']{
     gap: 1rem;
     align-items: center;
 }
+.left-side #due-date{
+    font-size: 0.7rem;
+}
+.right-side #remaining-days{
+    font-size: 1.4rem;
+}
 
 .right-side{
     display: flex;
     gap: 1rem;
     align-items: center;
+    padding: 0.25rem;
 }
+.right-side #task-complete{
+    scale: 2;
+}
+/* #endregion */

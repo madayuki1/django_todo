@@ -69,16 +69,16 @@ def get_sorted_task(tasks, selected_sort):
         )
     return tasks
 
-def toggle_task(request, task_id):
-    task = get_object_or_404(Task, id=task_id)
+def toggle_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
     task.completed = not task.completed
     task.save()
     return redirect(
         to='index'
     )
 
-def delete_task(request, task_id):
-    task = get_object_or_404(Task, id=task_id)
+def delete_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
     task.delete()
     return redirect(
         to='index'
