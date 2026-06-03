@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.urls import reverse_lazy
-from django.views.generic.edit import UpdateView
+from django.views.generic import UpdateView, ListView
 from datetime import timedelta
 from .models import Task
 from .constants import SORT_OPTION, DEFAULT_SORT
@@ -56,7 +56,22 @@ def index(request):
         template_name= 'tasks/tasks.html'
     )
 
-class TaskEdit(UpdateView):
+
+class TaskListView(ListView):
+    model = Task
+    template_name = "tasks/tasks.html"
+
+    def get_queryset(self):
+        return super().get_queryset()
+    
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["sorts"] = SORT_OPTION
+        return context
+    
+
+class TaskUpdateView(UpdateView):
     model = Task
     fields = ['title', 'due_date']
     template_name = "tasks/task_edit.html"
