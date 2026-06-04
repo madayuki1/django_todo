@@ -78,3 +78,11 @@
     scale: 2;
 }
 /* #endregion */
+
+/* #region modal */
+
+.modal{
+    background-color: yellow;
+}
+
+/* #endregion */

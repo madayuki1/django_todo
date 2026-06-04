@@ -15,8 +15,10 @@
             <a href='{% url "task_create" %}'>
                 Add Task
             </a>
+            <button type="submit" id="test">
+                Test Modal
+            </button>
         </div>
-        <div class= "right-side" >
             {% csrf_token %}
             <input
                 type="text"
@@ -46,9 +48,13 @@
             </form>
         </div>
     </section>
+    {% include "tasks/partials/task_create_modal.html" %}
     <div id="task-list">
         {% include "tasks/task_list.html" %}
     </div>
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script
+        src="{% static 'js/app.js' %}"
+    ></script>
 </body>
 </html>

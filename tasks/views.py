@@ -81,7 +81,9 @@ class TaskForm(forms.ModelForm):
 
         widgets = {
             "due_date": forms.DateInput(
-                attrs={"type": "date"}
+                attrs={
+                    "type": "date",
+                }
             )
         }
 class TaskCreateView(CreateView):
