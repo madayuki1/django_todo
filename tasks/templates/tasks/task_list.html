@@ -11,12 +11,12 @@
     {% endif %}
     ">
         <div class='left-side'>
-            <form action="{% url 'edit_task' task.id %}" method="get">
+            <form action="{% url 'task_update' task.id %}" method="get">
                 <button type="submit" class="btn-edit">
                     <img src="{% static "tasks/img/edit.png" %}" alt="Edit">
                 </button>
             </form>
-            <form action="{% url 'delete_task' task.id %}">
+            <form action="{% url 'task_delete' task.id %}">
                 <button class='btn-delete' type="submit">
                     <img src="{% static "tasks/img/delete.png" %}" alt="Delete">
                 </button>
@@ -26,7 +26,7 @@
         </div>
         <div class="right-side">
             <span id="remaining-days">{{ task.remaining_days }}</span>
-            <form action="{% url 'toggle_task' task.id %}">
+            <form action="{% url 'task_toggle' task.id %}">
                 <input
                     type="checkbox"
                     name="task_complete"

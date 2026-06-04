@@ -12,9 +12,9 @@
     <h1>Task List</h1>
     <section class="toolbar">
         <div class="left-side">
-            <button type="submit">
+            <a href='{% url "task_create" %}'>
                 Add Task
-            </button>
+            </a>
         </div>
         <div class= "right-side" >
             {% csrf_token %}

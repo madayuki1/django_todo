@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView
+from django import forms
+from django.views.generic import UpdateView, ListView, CreateView
 from datetime import timedelta
 from .models import Task
 from .constants import SORT_OPTION, DEFAULT_SORT
@@ -56,7 +57,6 @@ def index(request):
         template_name= 'tasks/tasks.html'
     )
 
-
 class TaskListView(ListView):
     model = Task
     template_name = "tasks/tasks.html"
@@ -70,11 +70,31 @@ class TaskListView(ListView):
         context["sorts"] = SORT_OPTION
         return context
     
+class TaskForm(forms.ModelForm):
+    """Form definition for Task."""
+
+    class Meta:
+        """Meta definition for Taskform."""
+
+        model = Task
+        fields = ('title', "due_date")
+
+        widgets = {
+            "due_date": forms.DateInput(
+                attrs={"type": "date"}
+            )
+        }
+class TaskCreateView(CreateView):
+    model = Task
+    template_name = "tasks/task_create.html"
+    form_class = TaskForm
+    
+
 
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ['title', 'due_date']
-    template_name = "tasks/task_edit.html"
+    template_name = "tasks/task_update.html"
     success_url = reverse_lazy('index')
 
 def get_sorted_task(tasks, selected_sort):
@@ -84,7 +104,7 @@ def get_sorted_task(tasks, selected_sort):
         )
     return tasks
 
-def toggle_task(request, pk):
+def task_toggle(request, pk):
     task = get_object_or_404(Task, id=pk)
     task.completed = not task.completed
     task.save()
@@ -92,7 +112,7 @@ def toggle_task(request, pk):
         to='index'
     )
 
-def delete_task(request, pk):
+def task_delete(request, pk):
     task = get_object_or_404(Task, id=pk)
     task.delete()
     return redirect(
