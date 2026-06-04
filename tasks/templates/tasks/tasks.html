@@ -11,17 +11,12 @@
 <body>
     <h1>Task List</h1>
     <section class="toolbar">
-        <div class="input-bar">
-            <form action="" method="post">
-                {% csrf_token %}
-                <input type="text" name="title" id="task-input" placeholder="Task Name...">
-                <div class="input-bar-bottom">
-                    <input type="datetime-local" name="due_date" id="btn-date" value="{{ tomorrow| date:'Y-m-d\TH:i' }}">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+        <div class="left-side">
+            <button type="submit">
+                Add Task
+            </button>
         </div>
-        <div class="search-bar">
+        <div class= "right-side" >
             {% csrf_token %}
             <input
                 type="text"
@@ -41,15 +36,13 @@
                         {{ value.label }}</option>
                     {% endfor %}
                 </select>
-                <div class="search-bar-bottom">
-                    <span>Hide Completed</span>
-                    <input
+                <span>Hide Completed</span>
+                <input
                         type="checkbox"
                         name="hide-completed"
                         id="hide-completed"
                         {% if hide_completed %} checked {% endif %}
                         onchange="this.form.submit()">
-                </div>
             </form>
         </div>
     </section>
