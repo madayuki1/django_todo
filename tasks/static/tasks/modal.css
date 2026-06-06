@@ -3,16 +3,25 @@
     position: fixed;
     inset: 0;
 
-    display: flex;
+    display: none;
     z-index: 1000;
     
     justify-content: center;
     align-items: center;
 }
+.modal-overlay.active{
+    display: flex;
+}
 .modal{
+    position: relative;
     padding: 10px;
     background-color: white;
     width: min(90%, 500px);
+}
+.modal .close-modal-create{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
 .modal-row{
     display: flex;
@@ -24,7 +33,4 @@
 .modal-row button{
     width: 40%;
     height: 2rem;
-}
-.hidden{
-    display: none;
 }
