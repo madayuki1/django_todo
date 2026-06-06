@@ -7,7 +7,7 @@ from datetime import timedelta
 class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=200)
-    due_date = models.DateTimeField(default=timezone.now())
+    due_date = models.DateField(default=timezone.now())
     completed = models.BooleanField(default=False)
     
     def __str__(self):
@@ -19,7 +19,7 @@ class Task(models.Model):
     @property
     def remaining_days_value(self):
         now = timezone.now().date()
-        delta = self.due_date.date() - now
+        delta = self.due_date - now
 
         return delta.days
     

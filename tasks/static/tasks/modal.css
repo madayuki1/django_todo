@@ -14,3 +14,17 @@
     background-color: white;
     width: min(90%, 500px);
 }
+.modal-row{
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    gap: 1rem;
+    justify-content: center;
+}
+.modal-row button{
+    width: 40%;
+    height: 2rem;
+}
+.hidden{
+    display: none;
+}

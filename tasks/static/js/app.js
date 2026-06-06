@@ -1,5 +1,6 @@
-const test_button = document.getElementById('test');
+const show_modal = document.getElementById('test');
+const modal = document.getElementById('modal')
 
-test_button.addEventListener("click", () => {
-    alert('test')
+show_modal.addEventListener("click", () => {
+    modal.classList.remove('hidden')
 });
