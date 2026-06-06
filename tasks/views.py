@@ -68,7 +68,16 @@ class TaskListView(ListView):
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["sorts"] = SORT_OPTION
+        context["form"] = form
         return context
+    
+    def post(self, request, *args, **kwargs):
+        form = TaskForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            
+        return redirect('index')
     
 class TaskForm(forms.ModelForm):
     """Form definition for Task."""

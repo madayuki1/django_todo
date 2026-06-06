@@ -3,9 +3,9 @@
       <button type="submit" id="close_modal_create" class="close-modal-create">X</button>
     <form action="" method="post">
         {% csrf_token %}
+        {{ form }}
         <div class="modal-row">
           <label for="{{ form.title.id_for_label}}">Task Title</label>
-          {{ form.title }}
         </div>
         <div class="modal-row">
           <label for="">due date</label>
