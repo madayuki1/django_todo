@@ -2,57 +2,43 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo Tasks</title>
-    <link rel="stylesheet" href="{% static 'tasks/style.css' %}">
-    <link rel="stylesheet" href="{% static 'tasks/modal.css' %}">
-</head>
-<body>
-    <h1>Task List</h1>
-    <section class="toolbar">
-        <div class="left-side">
-            <button type="submit" id="open_modal_create">
-                Add Tas
-            </button>
-        </div>
-            {% csrf_token %}
-            <input
-                type="text"
-                name="search"
-        
-                hx-get="{% url 'index' %}"
-                hx-trigger="keyup changed delay:300ms"
-                hx-target="#task-list"
-                hx-swap="innerHTML"
-                hx-include="closest form"
-                placeholder="Search tasks..."
-            >
-            <form action="" method="get">
-                <select name="sort" id="sort-list" onchange=this.form.submit()>
-                    {% for key, value in sorts.items %}
-                    <option value="{{ key }}" {% if selected_sort == key %} selected {% endif %}>
-                        {{ value.label }}</option>
-                    {% endfor %}
-                </select>
-                <span>Hide Completed</span>
-                <input
-                        type="checkbox"
-                        name="hide-completed"
-                        id="hide-completed"
-                        {% if hide_completed %} checked {% endif %}
-                        onchange="this.form.submit()">
-            </form>
-        </div>
-    </section>
-    <div id="task-list">
-        {% include "tasks/task_list.html" %}
-    </div>
-    {% include "tasks/partials/task_create_modal.html" %}
-    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-    <script
-        src="{% static 'js/app.js' %}"
-    ></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>Todo Tasks</title>
+        <link rel="stylesheet" href="{% static 'tasks/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'tasks/modal.css' %}" />
+    </head>
+    <body>
+        <h1>Task List</h1>
+        <section class="toolbar">
+            <div class="left-side">
+                <button type="submit" id="open_modal_create">Add Task</button>
+                {% csrf_token %}
+                <form action="" method="get">
+                    <input type="text"
+                           placeholder="Search..."
+                           name="search-list"
+                           id="search-list"
+                           value="{% if search %} {{ search }} {% endif %}" />
+                    <select name="sort-list" id="sort-list" onchange="this.form.submit()">
+                        {% for key, value in sorts.items %}
+                            <option value="{{ key }}" {% if selected_sort == key %}selected{% endif %}>{{ value.label }}</option>
+                        {% endfor %}
+                    </select>
+                    <span>Hide Completed</span>
+                    <input type="checkbox"
+                           name="hide-completed"
+                           id="hide-completed"
+                           {% if hide_completed %}checked{% endif %}
+                           onchange="this.form.submit()" />
+                </form>
+            </div>
+        </section>
+        <div id="task-list">{% include "tasks/task_list.html" %}</div>
+        {% include "tasks/partials/task_create_modal.html" %}
+        <script src="{% static 'js/app.js' %}"></script>
+    </body>
 </html>

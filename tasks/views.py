@@ -62,13 +62,28 @@ class TaskListView(ListView):
     template_name = "tasks/tasks.html"
 
     def get_queryset(self):
-        return super().get_queryset()
-    
+        queryset = super().get_queryset()
+        self.hide_completed = self.request.GET.get("hide-completed")
+        self.search = self.request.GET.get('search-list')
+        self.selected_sort = self.request.GET.get('sort-list', DEFAULT_SORT)
+
+        if self.hide_completed:
+            queryset = queryset.filter(completed=False)
+        
+        if self.search:
+            queryset = queryset.filter(title__icontains=self.search)
+        
+        queryset = get_sorted_task(queryset, self.selected_sort)
+        
+        return queryset    
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["sorts"] = SORT_OPTION
-        context["form"] = form
+        context["form"] = TaskForm
+        context["hide_completed"] = self.hide_completed
+        context["selected_sort"] = self.selected_sort
+        context["search"] = self.search
         return context
     
     def post(self, request, *args, **kwargs):
@@ -100,8 +115,6 @@ class TaskCreateView(CreateView):
     template_name = "tasks/task_create.html"
     form_class = TaskForm
     
-
-
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ['title', 'due_date']

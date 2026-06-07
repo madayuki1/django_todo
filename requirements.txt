@@ -3,3 +3,5 @@ django-debug-toolbar==6.3.0
 django-browser-reload==1.21.0
 django-watchfiles==1.4.0
 django-htmx==1.27.0
+
+djlint==1.39.0
