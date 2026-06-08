@@ -110,11 +110,6 @@ class TaskForm(forms.ModelForm):
                 }
             )
         }
-class TaskCreateView(CreateView):
-    model = Task
-    template_name = "tasks/task_create.html"
-    form_class = TaskForm
-    
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ['title', 'due_date']
