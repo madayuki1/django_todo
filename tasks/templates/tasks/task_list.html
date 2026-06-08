@@ -1,41 +1,31 @@
 {% load static %}
 {% for task in object_list %}
-<section>
-    <article class="task_element
-    {% if task.completed %}
-        completed-article
-    {% elif task.remaining_days == 'Overdue' %}
-        overdue-article
-    {% elif task.remaining_days == 'Today' %}
-        today-article
-    {% endif %}
-    ">
-        <div class='left-side'>
-            <form action="{% url 'task_update' task.id %}" method="get">
-                <button type="submit" class="btn-edit">
-                    <img src="{% static "tasks/img/edit.png" %}" alt="Edit">
-                </button>
-            </form>
-            <form action="{% url 'task_delete' task.id %}">
-                <button class='btn-delete' type="submit">
-                    <img src="{% static "tasks/img/delete.png" %}" alt="Delete">
-                </button>
-            </form>
-            <span>{{ task.title }}</span>
-            <span id="due-date">{{ task.due_date }}</span>
-        </div>
-        <div class="right-side">
-            <span id="remaining-days">{{ task.remaining_days }}</span>
-            <form action="{% url 'task_toggle' task.id %}">
-                <input
-                    type="checkbox"
-                    name="task_complete"
-                    id="task-complete"
-                    onchange="this.form.submit()"
-                    {% if task.completed %} checked {% endif %}
-                >
-            </form>
-        </div>
-    </article>
-</section>
+    <section>
+        <article class="task_element {% if task.completed %} completed-article {% elif task.remaining_days == 'Overdue' %} overdue-article {% elif task.remaining_days == 'Today' %} today-article {% endif %} ">
+            <div class='left-side'>
+                <form action="" hx-get="{% url 'task_update' task.id %}" hx-target="modal">
+                    <button type="submit" class="btn-edit" >
+                        <img src="{% static "tasks/img/edit.png" %}" alt="Edit">
+                    </button>
+                </form>
+                <form action="{% url 'task_delete' task.id %}">
+                    <button class='btn-delete' type="submit">
+                        <img src="{% static "tasks/img/delete.png" %}" alt="Delete">
+                    </button>
+                </form>
+                <span>{{ task.title }}</span>
+                <span id="due-date">{{ task.due_date }}</span>
+            </div>
+            <div class="right-side">
+                <span id="remaining-days">{{ task.remaining_days }}</span>
+                <form action="{% url 'task_toggle' task.id %}">
+                    <input type="checkbox"
+                           name="task_complete"
+                           id="task-complete"
+                           onchange="this.form.submit()"
+                           {% if task.completed %}checked{% endif %}>
+                </form>
+            </div>
+        </article>
+    </section>
 {% endfor %}
