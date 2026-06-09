@@ -1,36 +1,33 @@
-.modal-overlay{
+.form-overlay{
     background:rgba(0, 0, 0, 0.5);
     position: fixed;
     inset: 0;
 
-    display: none;
+    display: flex;
     z-index: 1000;
     
     justify-content: center;
     align-items: center;
 }
-.modal-overlay.active{
-    display: flex;
-}
-.modal{
+.form{
     position: relative;
     padding: 10px;
     background-color: white;
     width: min(90%, 500px);
 }
-.modal .close-modal-create{
+.form .close-form-create{
     position: absolute;
     top: 1rem;
     right: 1rem;
 }
-.modal-row{
+.form-row{
     display: flex;
     align-items: center;
     margin: 1rem;
     gap: 1rem;
     justify-content: center;
 }
-.modal-row button{
+.form-row button{
     width: 40%;
     height: 2rem;
 }

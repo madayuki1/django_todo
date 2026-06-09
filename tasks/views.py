@@ -71,16 +71,16 @@ class TaskForm(forms.ModelForm):
 
 class TaskCreateView(CreateView):
     model = Task
-    fields = ['title', 'due_date']
-    template_name = "tasks/task_create.html"
-    form = TaskForm()
+    # fields = ['title', 'due_date']
+    template_name = "tasks/task_form.html"
+    form_class = TaskForm
     success_url = reverse_lazy("index")
 
 class TaskUpdateView(UpdateView):
     model = Task
-    fields = ['title', 'due_date']
-    # template_name = "tasks/task_update.html"
-    form = TaskForm()
+    # fields = ['title', 'due_date']
+    template_name = "tasks/task_form.html"
+    form_class = TaskForm
     success_url = reverse_lazy("index")
 
 def get_sorted_task(tasks, selected_sort):
