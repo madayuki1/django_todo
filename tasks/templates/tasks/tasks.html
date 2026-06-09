@@ -15,14 +15,13 @@
         <h1>Task List</h1>
         <section class="toolbar">
             <div class="left-side">
-                <button type="submit" id="open_modal_create">Add Task</button>
+                <a href="{% url 'task_create' %}">Add Task</a>
                 {% csrf_token %}
                 <form action="" method="get">
                     <input type="text"
                            placeholder="Search..."
                            name="search-list"
-                           id="search-list"
-                           >
+                           id="search-list">
                     <select name="sort-list" id="sort-list" onchange="this.form.submit()">
                         {% for key, value in sorts.items %}
                             <option value="{{ key }}" {% if selected_sort == key %}selected{% endif %}>{{ value.label }}</option>

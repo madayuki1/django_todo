@@ -9,54 +9,6 @@ from datetime import timedelta
 from .models import Task
 from .constants import SORT_OPTION, DEFAULT_SORT
 
-def index(request):
-    tasks = Task.objects.all()
-    search = request.GET.get("search", "")
-    selected_sort = request.GET.get("sort", DEFAULT_SORT)
-    hide_completed = request.GET.get("hide-completed", "")
-
-    if search:
-        tasks = tasks.filter(title__icontains = search)
-    
-    if hide_completed:
-        tasks = tasks.filter(completed = False)
-    
-    tasks = get_sorted_task(tasks = tasks, selected_sort=selected_sort)
-
-    if request.method == "POST":
-        title = request.POST.get("title")
-        due_date = request.POST.get("due_date")
-
-        if title:
-            Task.objects.create(
-                title=title,
-                due_date=due_date
-            )
-
-        return redirect(
-            to='index'
-        )
-
-    context = {
-        "tasks": tasks,
-        "sorts": SORT_OPTION,
-        "selected_sort": selected_sort,
-        "hide_completed": hide_completed,
-        "tomorrow": timezone.now() + timedelta(days=1),
-    }
-
-    if request.htmx:
-        return render(
-            request=request,
-            template_name = "tasks/task_list.html",
-            context=context
-        )
-    return render(
-        request = request,
-        context = context,
-        template_name= 'tasks/tasks.html'
-    )
-
 class TaskListView(ListView):
     model = Task
     template_name = "tasks/tasks.html"
@@ -87,13 +39,14 @@ class TaskListView(ListView):
         return context
     
     def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
         form = TaskForm(request.POST)
 
         if form.is_valid():
             form.save()
             
         return redirect('index')
-    
+
 class TaskForm(forms.ModelForm):
     """Form definition for Task."""
 
@@ -104,17 +57,31 @@ class TaskForm(forms.ModelForm):
         fields = ('title', "due_date")
 
         widgets = {
+            "title": forms.TextInput(
+                attrs={
+                    "type": "text"
+                }
+            ),
             "due_date": forms.DateInput(
                 attrs={
                     "type": "date",
                 }
             )
         }
+
+class TaskCreateView(CreateView):
+    model = Task
+    fields = ['title', 'due_date']
+    template_name = "tasks/task_create.html"
+    form = TaskForm()
+    success_url = reverse_lazy("index")
+
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ['title', 'due_date']
-    template_name = "tasks/task_update.html"
-    success_url = reverse_lazy('index')
+    # template_name = "tasks/task_update.html"
+    form = TaskForm()
+    success_url = reverse_lazy("index")
 
 def get_sorted_task(tasks, selected_sort):
     if selected_sort in SORT_OPTION:
