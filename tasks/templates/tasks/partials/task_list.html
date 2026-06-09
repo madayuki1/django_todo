@@ -1,5 +1,4 @@
 {% load static %}
-
 {% if object_list %}
     {% for task in object_list %}
         <section>
@@ -23,10 +22,10 @@
                     <span id="remaining-days">{{ task.remaining_days }}</span>
                     <form action="{% url 'task_toggle' task.id %}">
                         <input type="checkbox"
-                            name="task_complete"
-                            id="task-complete"
-                            onchange="this.form.submit()"
-                            {% if task.completed %}checked{% endif %} />
+                               name="task_complete"
+                               id="task-complete"
+                               onchange="this.form.submit()"
+                               {% if task.completed %}checked{% endif %} />
                     </form>
                 </div>
             </article>
@@ -35,4 +34,3 @@
 {% else %}
     <p>Not Task Yet Bro</p>
 {% endif %}
-    

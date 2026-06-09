@@ -21,6 +21,39 @@
     display: flex;
     gap: 0.5rem;
 }
+.add-task{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem, 1rem;
+
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+
+    text-decoration: none;
+    color: inherit;
+}
+/* #endregion */
+
+/* #region todo stats */
+
+.stats-container{
+    background-color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 1200px;
+
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
+
+}
+
+
 /* #endregion */
 
 /* #region task card */

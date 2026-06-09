@@ -36,6 +36,14 @@ class TaskListView(ListView):
         context["hide_completed"] = self.hide_completed
         context["selected_sort"] = self.selected_sort
         context["search"] = self.search
+        context["task_count"] = Task.objects.count()
+        context["task_completed_count"] = Task.objects.filter(
+            completed=True
+        ).count()
+        context["task_remaining_count"] = Task.objects.filter(
+            completed=False
+        ).count()
+
         return context
     
     def post(self, request, *args, **kwargs):

@@ -14,9 +14,11 @@
         <h1>Task List</h1>
         <section class="toolbar">
             <div class="left-side">
-                <a href="{% url 'task_create' %}">Add Task</a>
-                {% csrf_token %}
+                <a href="{% url 'task_create' %}" class="add-task">Add Task</a>
+            </div>
+            <div>
                 <form action="" method="get">
+                    {% csrf_token %}
                     <input type="text"
                            placeholder="Search..."
                            name="search-list"
@@ -35,8 +37,8 @@
                 </form>
             </div>
         </section>
-        <div id="test_div"></div>
-        <div id="task-list">{% include "tasks/task_list.html" %}</div>
+        <div class="stats-container">{% include "tasks/partials/task_stats.html" %}</div>
+        <div id="task-list">{% include "tasks/partials/task_list.html" %}</div>
         <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
                 integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
                 crossorigin="anonymous"></script>
