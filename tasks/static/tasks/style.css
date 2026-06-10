@@ -39,18 +39,35 @@
 /* #region todo stats */
 
 .stats-container{
-    background-color: yellow;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     max-width: 1200px;
 
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
+
+}
+.stat-card{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
     border: 1px solid #ccc;
     border-radius: 0.5rem;
 
     padding: 0.5rem 1rem;
-    margin: 0 auto;
+    margin: 0.5rem 2rem;
 
+    background-color: #FFF3E0;
+}
+.stat-title{
+    font-size: 0.9rem;
+}
+.stat-value{
+    font-size: 1.8rem;
 }
 
 

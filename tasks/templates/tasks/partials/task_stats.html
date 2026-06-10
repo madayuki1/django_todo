@@ -1,4 +1,13 @@
 {% load static %}
-<div class="stats-element"><span>Total Task</span></div>
-<div class="stats-element"><span>Completed Task</span></div>
-<div class="stats-element"><span>Remaining Tasks</span></div>
+<div class="stat-card">
+    <span class="stat-title">Total Task</span>
+    <strong class="stat-value">{{ task_count }}</strong>
+</div>
+<div class="stat-card">
+    <span class="stat-title">Completed Task</span>
+    <strong class="stat-value">{{ task_completed_count }}</strong>
+</div>
+<div class="stat-card">
+    <span class="stat-title">Remaining Tasks</span>
+    <strong class="stat-value">{{ task_remaining_count }}</strong>
+</div>
