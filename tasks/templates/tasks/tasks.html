@@ -16,14 +16,18 @@
             <div class="left-side">
                 <a href="{% url 'task_create' %}" class="add-task">Add Task</a>
             </div>
-            <div>
-                <form action="" method="get">
+            <div class="filter-container">
+                <form class="filter-form" action="" method="get">
                     {% csrf_token %}
                     <input type="text"
+                           class="filter-search"
                            placeholder="Search..."
                            name="search-list"
                            id="search-list">
-                    <select name="sort-list" id="sort-list" onchange="this.form.submit()">
+                    <select class="filter-sort"
+                            name="sort-list"
+                            id="sort-list"
+                            onchange="this.form.submit()">
                         {% for key, value in sorts.items %}
                             <option value="{{ key }}" {% if selected_sort == key %}selected{% endif %}>{{ value.label }}</option>
                         {% endfor %}
