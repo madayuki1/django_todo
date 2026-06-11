@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task
+from .models import Task, Category
 
 admin.site.site_header = 'Our Django'
 # Register your models here.
@@ -8,3 +8,4 @@ admin.site.site_header = 'Our Django'
 #     fields = ['title', 'completed']
 
 admin.site.register(Task)
+admin.site.register(Category)
