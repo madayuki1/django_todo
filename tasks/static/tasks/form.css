@@ -13,10 +13,11 @@
     position: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: centerr;
+    justify-content: center;
 
     padding: 1rem 1rem;
-    margin: 0.5rem 1rem;
+    margin: 0.5rem auto;
+    gap: 1rem;  
     background-color: white;
     width: min(90%, 500px);
 
