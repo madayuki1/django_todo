@@ -30,17 +30,24 @@
     right: 1rem;
 }
 .form-row{
-    display: flex;
-    flex-direction: column;
-
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 1rem;
 }
-.form-row button{
-    width: 40%;
+.form-row input{
+    width: 100%;
+}
+.form-row-button{
+    display: flex;
+    justify-content: center;
     height: 2rem;
 }
+.form-row-button button{
+    width: 40%;
+}
 .modal-form{
-    display: grid;
-    grid-template-columns: minmax(80px, 120px) 1fr;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
 }

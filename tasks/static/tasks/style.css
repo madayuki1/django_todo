@@ -44,7 +44,8 @@
     justify-content: center;
 }
 #hide-completed{
-    transform: scale(2);
+    width: 1.5rem;
+    aspect-ratio: 1/1;
 }
 /* #endregion */
 
