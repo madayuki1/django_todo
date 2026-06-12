@@ -18,6 +18,11 @@
                     <span>{{ task.title }}</span>
                     <span id="due-date">{{ task.due_date }}</span>
                 </div>
+                {% if task.category %}
+                <span>
+                    {{ task.category }}
+                </span>
+                {% endif %}
                 <div class="right-side">
                     <span id="remaining-days">{{ task.remaining_days }}</span>
                     <form action="{% url 'task_toggle' task.id %}">
