@@ -62,7 +62,7 @@ class TaskForm(forms.ModelForm):
         """Meta definition for Taskform."""
 
         model = Task
-        fields = ('title', "due_date")
+        fields = [ 'title', "due_date", "category" ]
 
         widgets = {
             "title": forms.TextInput(

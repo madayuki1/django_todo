@@ -15,8 +15,10 @@
           {% csrf_token %}
                 <label for="{{ form.title.id_for_label }}">Task Title</label>
                 {{ form.title }}
-                <label for="">Due Date</label>
+                <label for="{{ form.due_date.id_for_label }}">Due Date</label>
                 {{ form.due_date }}
+                <label for="{{ form.category.id_for_label }}">Category</label>
+                {{ form.category }}
                 <button type="submit">Submit</button>
         </form>
       </div>

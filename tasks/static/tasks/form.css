@@ -18,7 +18,7 @@
     padding: 1rem 1rem;
     margin: 0.5rem auto;
     gap: 1rem;  
-    background-color: white;
+    background-color: #F5F0FF;
     width: min(90%, 500px);
 
     border: 1px solid #ccc;
@@ -54,6 +54,6 @@
     padding: 0.5rem 1rem;
     gap: 1rem;
 }
-.modal-form input{
+.modal-form input, select{
     height: 1.5rem;
 }

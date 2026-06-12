@@ -2,7 +2,17 @@
 {% if object_list %}
     {% for task in object_list %}
         <section>
-            <article class="task_element {% if task.completed %} completed-article {% elif task.remaining_days == 'Overdue' %} overdue-article {% elif task.remaining_days == 'Today' %} today-article {% endif %}">
+            <article 
+                class="task_element 
+                {% if task.completed %} 
+                    completed-article 
+                {% elif task.remaining_days == 'Overdue' %} 
+                    overdue-article 
+                {% elif task.remaining_days == 'Today' %} 
+                    today-article 
+                {% else %}
+                    default-article
+                {% endif %}">
                 <div class="left-side">
                     <a href="{% url 'task_update' task.id %}">
                         <img src="{% static 'tasks/img/edit.png' %}" alt="edit">
@@ -13,12 +23,10 @@
                     <span>{{ task.title }}</span>
                     <span id="due-date">{{ task.due_date }}</span>
                 </div>
-                {% if task.category %}
-                <span class="category-tag">
-                    {{ task.category }}
-                </span>
-                {% endif %}
                 <div class="right-side">
+                    {% if task.category %}
+                        <span class="category-tag">{{ task.category }}</span>
+                    {% endif %}
                     <span id="remaining-days">{{ task.remaining_days }}</span>
                     <form action="{% url 'task_toggle' task.id %}">
                         <input type="checkbox"
