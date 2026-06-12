@@ -100,6 +100,16 @@
     max-width: 1200px;
     margin: 1rem auto;
 }
+
+.category-tag{
+    display:inline-block;
+    padding: 0.5rem 0.5rem;
+
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 0.5rem;
+    background-color: #d97b7b;
+}
 /* #region task-color */
 
 .completed-article{

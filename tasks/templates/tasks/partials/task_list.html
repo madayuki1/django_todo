@@ -7,11 +7,6 @@
                     <a href="{% url 'task_update' task.id %}">
                         <img src="{% static 'tasks/img/edit.png' %}" alt="edit">
                     </a>
-                    <!-- <form action="{% url 'task_delete' task.id %}">
-                        <button class="btn-delete" type="submit">
-                            <img src="{% static 'tasks/img/delete.png' %}" alt="Delete" />
-                        </button>
-                    </form> -->
                     <a href="{% url 'task_delete' task.id %}">
                         <img src="{% static 'tasks/img/delete.png' %}" alt="delete">
                     </a>
@@ -19,7 +14,7 @@
                     <span id="due-date">{{ task.due_date }}</span>
                 </div>
                 {% if task.category %}
-                <span>
+                <span class="category-tag">
                     {{ task.category }}
                 </span>
                 {% endif %}
