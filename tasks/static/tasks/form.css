@@ -42,7 +42,7 @@
 .form-row-button{
     display: flex;
     justify-content: center;
-    height: 2rem;
+    height: 4rem;
 }
 .form-row-button button{
     width: 40%;
@@ -50,4 +50,10 @@
 .modal-form{
     display: flex;
     flex-direction: column;
+
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+}
+.modal-form input{
+    height: 1.5rem;
 }
