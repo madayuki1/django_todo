@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django import forms
 from django.views.generic import UpdateView, ListView, CreateView
 from datetime import timedelta
-from .models import Task
+from .models import Task, Category
 from .constants import SORT_OPTION, DEFAULT_SORT
 
 class TaskListView(ListView):
@@ -18,13 +18,16 @@ class TaskListView(ListView):
         self.hide_completed = self.request.GET.get("hide-completed")
         self.search = self.request.GET.get('search-list')
         self.selected_sort = self.request.GET.get('sort-list', DEFAULT_SORT)
-
+        self.selected_category = self.request.GET.get("sort-category")
         if self.hide_completed:
             queryset = queryset.filter(completed=False)
         
         if self.search:
             queryset = queryset.filter(title__icontains=self.search)
         
+        queryset = queryset.filter(
+            category_id = self.selected_category
+        )
         queryset = get_sorted_task(queryset, self.selected_sort)
         
         return queryset    
@@ -43,6 +46,7 @@ class TaskListView(ListView):
         context["task_remaining_count"] = Task.objects.filter(
             completed=False
         ).count()
+        context["categories"] = Category.objects.all()
 
         return context
     

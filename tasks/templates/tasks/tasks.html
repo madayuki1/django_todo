@@ -24,6 +24,11 @@
                            placeholder="Search..."
                            name="search-list"
                            id="search-list">
+                    <select class="filter-sort" name="filter-category" id="select-category">
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
                     <select class="filter-sort"
                             name="sort-list"
                             id="sort-list"
