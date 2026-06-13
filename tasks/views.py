@@ -18,16 +18,17 @@ class TaskListView(ListView):
         self.hide_completed = self.request.GET.get("hide-completed")
         self.search = self.request.GET.get('search-list')
         self.selected_sort = self.request.GET.get('sort-list', DEFAULT_SORT)
-        self.selected_category = self.request.GET.get("sort-category")
+        self.selected_category = self.request.GET.get("filter-category")
         if self.hide_completed:
             queryset = queryset.filter(completed=False)
         
         if self.search:
             queryset = queryset.filter(title__icontains=self.search)
-        
-        queryset = queryset.filter(
-            category_id = self.selected_category
-        )
+
+        if self.selected_category:
+            queryset = queryset.filter(
+                category_id = self.selected_category
+            )
         queryset = get_sorted_task(queryset, self.selected_sort)
         
         return queryset    
@@ -38,6 +39,7 @@ class TaskListView(ListView):
         context["form"] = TaskForm
         context["hide_completed"] = self.hide_completed
         context["selected_sort"] = self.selected_sort
+        context["selected_category"] = int( self.selected_category ) if self.selected_category else None
         context["search"] = self.search
         context["task_count"] = Task.objects.count()
         context["task_completed_count"] = Task.objects.filter(

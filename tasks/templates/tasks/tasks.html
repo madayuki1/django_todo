@@ -24,9 +24,22 @@
                            placeholder="Search..."
                            name="search-list"
                            id="search-list">
-                    <select class="filter-sort" name="filter-category" id="select-category">
+                    <select class="filter-sort"
+                            name="filter-category"
+                            id="select-category"
+                            onchange=this.form.submit()>
+                        <option value=""
+                            {% if not selected_category %}
+                            selected
+                            {% endif %}>
+                            All
+                        </option>
                         {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            <option value="{{ category.id }}"
+                            {% if selected_category == category.id %}
+                            selected
+                            {% endif %}
+                            >{{ category.name }}</option>
                         {% endfor %}
                     </select>
                     <select class="filter-sort"
