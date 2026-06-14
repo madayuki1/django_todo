@@ -32,15 +32,13 @@ User can create, update, delete, search and categorize the task in a responsive 
 ![alt text](image-1.png)
 
 ## Installation
+```bash
 git clone https://github.com/madayuki1/django_todo.git
-
 cd django-todo
-
 pip install -r requirements.txt
-
 python manage.py migrate
-
 python manage.py runserver
+```
 
 ## Challenges & Lesson Learned
 - Learned Django classed based view
