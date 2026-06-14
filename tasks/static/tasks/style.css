@@ -152,4 +152,9 @@
 .right-side #task-complete{
     scale: 2;
 }
+.no-task{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+}
 /* #endregion */
